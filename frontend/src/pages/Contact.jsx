@@ -1,285 +1,158 @@
 import React, { useState } from "react";
-import {
-  FiMail,
-  FiPhone,
-  FiMapPin,
-  FiSend,
-  FiInstagram,
-  FiFacebook,
-} from "react-icons/fi";
+import { FiMail, FiPhone, FiMapPin, FiInstagram, FiFacebook } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa";
+import PageHero from "../components/PageHero";
+import { EMAIL, PHONE_DISPLAY, PHONE_LINK, whatsappLink } from "../config";
+
+const inputClass =
+  "w-full rounded-xl border border-slate-200 px-4 py-3 text-base outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState({ name: "", message: "" });
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log(formData);
-
-    alert("Thank you! We will get back to you soon.");
-
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      message: "",
-    });
+    const text = `Hi Ponia'g Hing, I'm ${formData.name.trim()}.\n\n${formData.message.trim()}`;
+    window.open(whatsappLink(text), "_blank");
+    setFormData({ name: "", message: "" });
   };
 
+  const contacts = [
+    {
+      icon: FaWhatsapp,
+      label: "WhatsApp",
+      value: PHONE_DISPLAY,
+      href: whatsappLink(),
+      iconClass: "bg-whatsapp",
+    },
+    { icon: FiPhone, label: "Call us", value: PHONE_DISPLAY, href: PHONE_LINK, iconClass: "bg-blue-700" },
+    { icon: FiMail, label: "Email", value: EMAIL, href: `mailto:${EMAIL}`, iconClass: "bg-blue-700" },
+    { icon: FiMapPin, label: "Location", value: "India", iconClass: "bg-blue-700" },
+  ];
+
   return (
-    <div className="bg-[#F8F3E9] min-h-screen">
+    <div className="min-h-screen bg-surface">
+      <PageHero
+        eyebrow="Contact · संपर्क"
+        title="Let's talk."
+        highlight="We'd love to hear from you."
+        hindi="बात कीजिए, हमें खुशी होगी।"
+      />
 
-      {/* Hero */}
-      <section className="bg-[#351818] text-white">
-        <div className="max-w-7xl mx-auto px-6 py-24 lg:py-28">
+      <section className="py-12 sm:py-16 lg:py-20">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-5 lg:gap-12 lg:px-8">
+          <div className="lg:col-span-2">
+            <h2 className="text-3xl font-bold text-navy">Have a question?</h2>
+            <p className="mt-3 leading-7 text-slate-600">
+              The fastest way to reach us is WhatsApp.
+            </p>
 
-          <p className="text-[#E9C46A] uppercase tracking-[0.3em] text-sm font-semibold">
-            Contact · संपर्क
-          </p>
+            <div className="mt-8 space-y-3">
+              {contacts.map(({ icon: Icon, label, value, href, iconClass }) => {
+                const content = (
+                  <>
+                    <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-lg text-white ${iconClass}`}>
+                      <Icon />
+                    </span>
+                    <span>
+                      <span className="block text-sm font-semibold text-navy">{label}</span>
+                      <span className="block break-all text-slate-600">{value}</span>
+                    </span>
+                  </>
+                );
 
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mt-5 max-w-4xl leading-tight">
-            Let's talk.
-            <span className="block text-[#E9C46A]">
-              We'd love to hear from you.
-            </span>
-          </h1>
-
-          <p className="text-2xl font-semibold mt-6">
-            बात कीजिए, हमें खुशी होगी।
-          </p>
-
-        </div>
-      </section>
-
-      {/* Contact Content */}
-      <section className="py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-6">
-
-          <div className="grid lg:grid-cols-5 gap-12">
-
-            {/* Info */}
-            <div className="lg:col-span-2">
-
-              <p className="text-[#8B1E1E] uppercase tracking-[0.25em] text-sm font-semibold">
-                Get In Touch
-              </p>
-
-              <h2 className="text-4xl font-bold text-[#351818] mt-4">
-                Have a question?
-              </h2>
-
-              <p className="text-gray-600 leading-8 mt-5">
-                Whether you want to know more about our products, have a
-                business enquiry or simply want to say hello, feel free to
-                reach out.
-              </p>
-
-              <div className="mt-10 space-y-7">
-
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#8B1E1E] text-white flex items-center justify-center shrink-0">
-                    <FiMail />
+                return href ? (
+                  <a
+                    key={label}
+                    href={href}
+                    target={href.startsWith("http") ? "_blank" : undefined}
+                    rel="noreferrer"
+                    className="flex items-center gap-4 rounded-2xl bg-white p-4 shadow-sm transition hover:shadow-md"
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  <div key={label} className="flex items-center gap-4 rounded-2xl bg-white p-4 shadow-sm">
+                    {content}
                   </div>
-
-                  <div>
-                    <p className="font-semibold text-[#351818]">
-                      Email
-                    </p>
-
-                    <p className="text-gray-600 mt-1">
-                      hello@poniaghing.com
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#8B1E1E] text-white flex items-center justify-center shrink-0">
-                    <FiPhone />
-                  </div>
-
-                  <div>
-                    <p className="font-semibold text-[#351818]">
-                      Phone
-                    </p>
-
-                    <p className="text-gray-600 mt-1">
-                      +91 99999 99999
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#8B1E1E] text-white flex items-center justify-center shrink-0">
-                    <FiMapPin />
-                  </div>
-
-                  <div>
-                    <p className="font-semibold text-[#351818]">
-                      Location
-                    </p>
-
-                    <p className="text-gray-600 mt-1">
-                      India
-                    </p>
-                  </div>
-                </div>
-
-              </div>
-
-              <div className="flex gap-3 mt-10">
-
-                <a
-                  href="#"
-                  className="w-11 h-11 rounded-full bg-[#351818] text-white flex items-center justify-center hover:bg-[#8B1E1E] transition"
-                >
-                  <FiInstagram />
-                </a>
-
-                <a
-                  href="#"
-                  className="w-11 h-11 rounded-full bg-[#351818] text-white flex items-center justify-center hover:bg-[#8B1E1E] transition"
-                >
-                  <FiFacebook />
-                </a>
-
-              </div>
-
+                );
+              })}
             </div>
 
-            {/* Form */}
-            <div className="lg:col-span-3">
+            <div className="mt-6 flex gap-3">
+              {[
+                { icon: FiInstagram, label: "Instagram", href: "https://www.instagram.com/" },
+                { icon: FiFacebook, label: "Facebook", href: "https://www.facebook.com/" },
+              ].map(({ icon: Icon, label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={label}
+                  className="flex h-11 w-11 items-center justify-center rounded-full bg-navy text-white transition hover:bg-blue-700"
+                >
+                  <Icon />
+                </a>
+              ))}
+            </div>
+          </div>
 
-              <form
-                onSubmit={handleSubmit}
-                className="bg-white rounded-3xl p-7 md:p-10 shadow-sm"
-              >
+          <div className="lg:col-span-3">
+            <form onSubmit={handleSubmit} className="rounded-2xl bg-white p-5 shadow-sm sm:p-8">
+              <h3 className="text-2xl font-bold text-navy">Send us a message</h3>
+              <p className="mt-1 text-slate-500">Your message will open in WhatsApp, ready to send.</p>
 
-                <h3 className="text-2xl font-bold text-[#351818]">
-                  Send us a message
-                </h3>
-
-                <p className="text-gray-500 mt-2">
-                  Fill in the details and we'll get back to you.
-                </p>
-
-                <div className="grid md:grid-cols-2 gap-5 mt-8">
-
-                  <div>
-                    <label className="block text-sm font-semibold text-[#351818] mb-2">
-                      Your Name
-                    </label>
-
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="Enter your name"
-                      required
-                      className="w-full px-4 py-3.5 rounded-xl border border-gray-200 outline-none focus:border-[#8B1E1E] transition"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-[#351818] mb-2">
-                      Email Address
-                    </label>
-
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="Enter your email"
-                      required
-                      className="w-full px-4 py-3.5 rounded-xl border border-gray-200 outline-none focus:border-[#8B1E1E] transition"
-                    />
-                  </div>
-
-                </div>
-
-                <div className="mt-5">
-
-                  <label className="block text-sm font-semibold text-[#351818] mb-2">
-                    Phone Number
+              <div className="mt-6 space-y-5">
+                <div>
+                  <label htmlFor="contact-name" className="mb-1.5 block text-sm font-semibold text-navy">
+                    Your name
                   </label>
-
                   <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
+                    id="contact-name"
+                    type="text"
+                    name="name"
+                    autoComplete="name"
+                    value={formData.name}
                     onChange={handleChange}
-                    placeholder="Enter your phone number"
-                    className="w-full px-4 py-3.5 rounded-xl border border-gray-200 outline-none focus:border-[#8B1E1E] transition"
+                    placeholder="Enter your name"
+                    required
+                    className={inputClass}
                   />
-
                 </div>
 
-                <div className="mt-5">
-
-                  <label className="block text-sm font-semibold text-[#351818] mb-2">
+                <div>
+                  <label htmlFor="contact-message" className="mb-1.5 block text-sm font-semibold text-navy">
                     Message
                   </label>
-
                   <textarea
+                    id="contact-message"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="How can we help you?"
-                    rows="6"
+                    rows="5"
                     required
-                    className="w-full px-4 py-3.5 rounded-xl border border-gray-200 outline-none focus:border-[#8B1E1E] transition resize-none"
+                    className={`${inputClass} resize-none`}
                   />
-
                 </div>
+              </div>
 
-                <button
-                  type="submit"
-                  className="mt-6 w-full bg-[#8B1E1E] hover:bg-[#6F1717] text-white py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition"
-                >
-                  Send Message
-                  <FiSend />
-                </button>
-
-              </form>
-
-            </div>
-
+              <button
+                type="submit"
+                className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-whatsapp py-4 font-bold text-white transition hover:bg-whatsapp-dark"
+              >
+                <FaWhatsapp className="text-xl" />
+                Send on WhatsApp
+              </button>
+            </form>
           </div>
         </div>
       </section>
-
-      {/* Bottom */}
-      <section className="bg-white py-16">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-
-          <p className="text-[#8B1E1E] font-semibold uppercase tracking-[0.2em] text-sm">
-            Ponia'g Hing
-          </p>
-
-          <h2 className="text-3xl md:text-4xl font-bold text-[#351818] mt-4">
-            Good food starts with good ingredients.
-          </h2>
-
-          <p className="text-gray-500 mt-4">
-            अच्छा खाना, अच्छे ingredients से शुरू होता है।
-          </p>
-
-        </div>
-      </section>
-
     </div>
   );
 };

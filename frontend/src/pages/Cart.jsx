@@ -5,9 +5,14 @@ import {
   FiPlus,
   FiTrash2,
   FiArrowRight,
+  FiArrowLeft,
   FiShoppingBag,
+  FiTruck,
 } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
+import { ProductThumb } from "../components/ProductVisual";
+import CheckoutSteps from "../components/CheckoutSteps";
 
 const Cart = () => {
   const {
@@ -16,202 +21,191 @@ const Cart = () => {
     decreaseQuantity,
     removeFromCart,
     cartTotal,
+    cartCount,
+    cartSavings,
   } = useCart();
 
   if (cart.length === 0) {
     return (
-      <div className="min-h-[70vh] bg-[#F8F3E9] flex items-center justify-center px-6">
-
-        <div className="text-center">
-
-          <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto">
-            <FiShoppingBag className="text-3xl text-[#8B1E1E]" />
+      <div className="flex min-h-[70vh] items-center justify-center bg-surface px-6 py-16">
+        <div className="max-w-md text-center">
+          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-sm">
+            <FiShoppingBag className="text-3xl text-blue-700" />
           </div>
 
-          <h1 className="text-4xl font-bold text-[#351818] mt-6">
+          <h1 className="mt-6 text-3xl font-bold text-navy sm:text-4xl">
             Your cart is empty
           </h1>
 
-          <p className="text-gray-600 mt-3">
-            Add some delicious Ponia'g Hing to your cart.
+          <p className="mt-3 text-slate-600">
+            Add some delicious Ponia'g Hing to get started.
           </p>
 
           <Link
             to="/our-hing"
-            className="inline-flex items-center gap-2 mt-7 bg-[#8B1E1E] text-white px-7 py-3.5 rounded-xl font-semibold"
+            className="mt-7 inline-flex items-center gap-2 rounded-xl bg-blue-700 px-7 py-3.5 font-semibold text-white transition hover:bg-blue-800"
           >
             Shop Hing
             <FiArrowRight />
           </Link>
-
         </div>
-
       </div>
     );
   }
 
   return (
-    <div className="bg-[#F8F3E9] min-h-screen py-16 lg:py-24">
+    <div className="min-h-screen bg-surface pb-32 pt-8 sm:pt-12 lg:pb-24">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <CheckoutSteps current={1} />
 
-      <div className="max-w-7xl mx-auto px-6">
-
-        <div className="mb-10">
-
-          <p className="text-[#8B1E1E] uppercase tracking-[0.25em] text-sm font-semibold">
-            Your Cart
-          </p>
-
-          <h1 className="text-4xl md:text-5xl font-bold text-[#351818] mt-3">
-            Your Ponia'g Hing
+        <div className="mb-6 mt-6 flex flex-wrap items-end justify-between gap-3 sm:mb-8">
+          <h1 className="text-3xl font-bold text-navy sm:text-4xl">
+            Your Cart{" "}
+            <span className="text-lg font-semibold text-slate-500 sm:text-xl">
+              ({cartCount} {cartCount === 1 ? "item" : "items"})
+            </span>
           </h1>
 
+          <Link
+            to="/our-hing"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-800"
+          >
+            <FiArrowLeft />
+            Continue shopping
+          </Link>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-
-          {/* Cart Items */}
-          <div className="lg:col-span-2 space-y-5">
-
+        <div className="grid gap-6 lg:grid-cols-3 lg:gap-8">
+          <div className="space-y-4 lg:col-span-2">
             {cart.map((item) => (
-
               <div
                 key={item.id}
-                className="bg-white rounded-3xl p-5 md:p-7 flex flex-col sm:flex-row gap-6"
+                className="flex gap-4 rounded-2xl bg-white p-4 shadow-sm sm:gap-5 sm:p-5"
               >
+                <ProductThumb product={item} className="h-20 w-20 sm:h-24 sm:w-24" />
 
-                {/* Image */}
-                <div className="w-full sm:w-36 h-36 bg-[#F8F3E9] rounded-2xl flex items-center justify-center p-4 shrink-0">
-
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="max-h-full max-w-full object-contain"
-                  />
-
-                </div>
-
-                {/* Details */}
-                <div className="flex-1">
-
-                  <div className="flex justify-between gap-4">
-
-                    <div>
-
-                      <h2 className="text-xl font-bold text-[#351818]">
+                <div className="flex min-w-0 flex-1 flex-col">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <h2 className="truncate text-base font-bold text-navy sm:text-lg">
                         {item.name}
                       </h2>
-
-                      <p className="text-gray-500 mt-1">
-                        {item.size}
+                      <p className="text-sm text-slate-500">
+                        {item.size} · ₹{item.price} each
                       </p>
-
                     </div>
 
                     <button
+                      type="button"
                       onClick={() => removeFromCart(item.id)}
-                      className="text-gray-400 hover:text-red-600 transition"
+                      aria-label={`Remove ${item.name}`}
+                      className="-mr-1 -mt-1 rounded-lg p-2 text-slate-400 transition hover:bg-red-50 hover:text-red-600"
                     >
                       <FiTrash2 />
                     </button>
-
                   </div>
 
-                  <p className="text-xl font-bold text-[#8B1E1E] mt-4">
-                    ₹{item.price}
-                  </p>
-
-                  <div className="flex items-center justify-between mt-5">
-
-                    {/* Quantity */}
-                    <div className="flex items-center border border-gray-200 rounded-xl overflow-hidden">
-
+                  <div className="mt-auto flex items-center justify-between pt-3">
+                    <div className="flex items-center overflow-hidden rounded-xl border border-slate-200">
                       <button
+                        type="button"
                         onClick={() => decreaseQuantity(item.id)}
-                        className="w-10 h-10 flex items-center justify-center hover:bg-[#F8F3E9]"
+                        aria-label={`Decrease ${item.name} quantity`}
+                        className="flex h-10 w-10 items-center justify-center transition hover:bg-surface"
                       >
                         <FiMinus />
                       </button>
 
-                      <span className="w-10 text-center font-semibold">
+                      <span className="w-9 text-center font-semibold" aria-live="polite">
                         {item.quantity}
                       </span>
 
                       <button
+                        type="button"
                         onClick={() => increaseQuantity(item.id)}
-                        className="w-10 h-10 flex items-center justify-center hover:bg-[#F8F3E9]"
+                        aria-label={`Increase ${item.name} quantity`}
+                        className="flex h-10 w-10 items-center justify-center transition hover:bg-surface"
                       >
                         <FiPlus />
                       </button>
-
                     </div>
 
-                    <p className="font-bold text-[#351818]">
+                    <p className="text-lg font-bold text-navy">
                       ₹{item.price * item.quantity}
                     </p>
-
                   </div>
-
                 </div>
-
               </div>
-
             ))}
-
           </div>
 
-          {/* Summary */}
           <div>
+            <div className="rounded-2xl bg-white p-6 shadow-sm lg:sticky lg:top-28">
+              <h2 className="text-xl font-bold text-navy">Order Summary</h2>
 
-            <div className="bg-white rounded-3xl p-7 sticky top-28">
-
-              <h2 className="text-2xl font-bold text-[#351818]">
-                Order Summary
-              </h2>
-
-              <div className="border-b border-gray-100 py-5 space-y-4">
-
-                <div className="flex justify-between text-gray-600">
+              <div className="space-y-3 border-b border-slate-100 py-5 text-sm">
+                <div className="flex justify-between text-slate-600">
                   <span>Subtotal</span>
                   <span>₹{cartTotal}</span>
                 </div>
 
-                <div className="flex justify-between text-gray-600">
-                  <span>Delivery</span>
-                  <span className="text-green-600">
-                    To be confirmed
-                  </span>
-                </div>
+                {cartSavings > 0 && (
+                  <div className="flex justify-between text-green-700">
+                    <span>You save</span>
+                    <span>₹{cartSavings}</span>
+                  </div>
+                )}
 
+                <div className="flex justify-between text-slate-600">
+                  <span>Delivery</span>
+                  <span>Confirmed on WhatsApp</span>
+                </div>
               </div>
 
-              <div className="flex justify-between text-xl font-bold text-[#351818] py-5">
+              <div className="flex justify-between py-5 text-xl font-bold text-navy">
                 <span>Total</span>
                 <span>₹{cartTotal}</span>
               </div>
 
               <Link
                 to="/checkout"
-                className="w-full bg-[#8B1E1E] hover:bg-[#6F1717] text-white py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition"
+                className="hidden w-full items-center justify-center gap-2 rounded-xl bg-blue-700 py-4 font-semibold text-white transition hover:bg-blue-800 lg:flex"
               >
                 Proceed to Checkout
                 <FiArrowRight />
               </Link>
 
-              <Link
-                to="/our-hing"
-                className="block text-center text-[#8B1E1E] font-semibold mt-5"
-              >
-                Continue Shopping
-              </Link>
-
+              <div className="mt-5 space-y-3 rounded-xl bg-surface p-4 text-sm text-slate-600">
+                <p className="flex items-start gap-2.5">
+                  <FaWhatsapp className="mt-0.5 shrink-0 text-lg text-whatsapp" />
+                  No online payment needed. You'll confirm the order with us on WhatsApp.
+                </p>
+                <p className="flex items-start gap-2.5">
+                  <FiTruck className="mt-0.5 shrink-0 text-lg text-blue-700" />
+                  Delivery charges and timing are shared when we confirm.
+                </p>
+              </div>
             </div>
-
           </div>
-
         </div>
-
       </div>
 
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 px-4 py-3 shadow-[0_-8px_24px_rgba(15,23,42,0.08)] backdrop-blur lg:hidden">
+        <div className="mx-auto flex max-w-6xl items-center gap-4">
+          <div>
+            <p className="text-xs text-slate-500">Total</p>
+            <p className="text-xl font-bold text-navy">₹{cartTotal}</p>
+          </div>
+
+          <Link
+            to="/checkout"
+            className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-blue-700 py-3.5 font-semibold text-white transition hover:bg-blue-800"
+          >
+            Checkout
+            <FiArrowRight />
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

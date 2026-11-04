@@ -1,1 +1,39 @@
 @import "tailwindcss";
+
+@theme {
+  --color-navy: #0d2340;
+  --color-navy-light: #173a64;
+  --color-gold: #d7b66a;
+  --color-gold-light: #f4d78b;
+  --color-gold-dark: #b78627;
+  --color-surface: #f4f7fc;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-dark: #1ebe5d;
+
+  --animate-toast-in: toast-in 0.25s ease-out;
+
+  @keyframes toast-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-white text-slate-900 antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-blue-600;
+  }
+}

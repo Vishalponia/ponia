@@ -10,7 +10,7 @@ import {
 
 const Hero = () => {
   return (
-    <section className="relative isolate overflow-hidden bg-white text-slate-950">
+    <section className="relative isolate overflow-hidden bg-white text-navy">
 
       {/* BACKGROUND DECORATION */}
       <div className="pointer-events-none absolute -right-40 -top-32 h-[450px] w-[450px] rounded-full bg-blue-100/60 blur-3xl" />
@@ -18,7 +18,7 @@ const Hero = () => {
 
       <div className="relative mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
 
-        <div className="grid min-h-[calc(100vh-100px)] items-center gap-12 py-14 sm:py-16 lg:grid-cols-2 lg:gap-8 lg:py-16">
+        <div className="grid items-center gap-10 py-10 sm:py-16 lg:min-h-[calc(100vh-80px)] lg:grid-cols-2 lg:gap-8 lg:py-16">
 
           {/* LEFT CONTENT */}
           <div className="relative z-10 mx-auto w-full max-w-2xl lg:mx-0">
@@ -36,7 +36,7 @@ const Hero = () => {
             </div>
 
             {/* MAIN HEADING */}
-            <h1 className="text-5xl font-extrabold leading-[1.08] tracking-tight text-slate-950 sm:text-6xl lg:text-6xl xl:text-7xl">
+            <h1 className="text-5xl font-extrabold leading-[1.08] tracking-tight text-navy sm:text-6xl lg:text-6xl xl:text-7xl">
               Small Pinch.
               <br />
 
@@ -75,7 +75,7 @@ const Hero = () => {
             </p>
 
             {/* CTA BUTTONS */}
-            <div className="mt-8 flex flex-wrap items-center gap-4">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
 
               <Link
                 to="/our-hing"
@@ -91,7 +91,7 @@ const Hero = () => {
 
               <Link
                 to="/about-us"
-                className="group inline-flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-sm font-bold text-slate-800 transition duration-300 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700 sm:text-base"
+                className="group inline-flex items-center justify-center gap-3 rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-sm font-bold text-slate-800 transition duration-300 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700 sm:text-base"
               >
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-50 text-blue-700 transition group-hover:bg-blue-100">
                   <FiPlay size={15} fill="currentColor" />
@@ -146,48 +146,15 @@ const Hero = () => {
                 {/* LIGHT EFFECT */}
                 <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-white/90 blur-2xl" />
 
-                {/* BRAND EMBLEM */}
-                <div className="relative mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-700 shadow-lg shadow-blue-700/20 sm:h-20 sm:w-20">
-                  <span className="text-3xl font-extrabold text-white sm:text-4xl">
-                    P
-                  </span>
-                </div>
+                <img
+                  src="/images/poniag-logo.png"
+                  alt="Ponia'g Hathrasi Hing logo"
+                  className="relative h-40 w-40 rounded-full shadow-xl shadow-blue-900/15 sm:h-52 sm:w-52"
+                />
 
-                <p className="relative text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
-                  Ponia<span className="text-blue-700">'g</span>
-                </p>
+                <div className="my-6 h-1 w-16 rounded-full bg-gold" />
 
-                <p className="mt-2 text-xs font-bold uppercase tracking-[0.4em] text-slate-500 sm:text-sm">
-                  Premium Hing
-                </p>
-
-                <div className="my-6 h-1 w-16 rounded-full bg-blue-600" />
-
-                {/* FLAVOUR SYMBOL */}
-                <div className="flex h-24 w-24 items-center justify-center rounded-full border border-blue-200 bg-white/80 shadow-inner sm:h-28 sm:w-28">
-                  <svg
-                    viewBox="0 0 100 100"
-                    className="h-16 w-16 text-blue-700 sm:h-20 sm:w-20"
-                    fill="none"
-                    aria-label="Decorative botanical illustration"
-                  >
-                    <path
-                      d="M50 83V29M50 57C29 57 20 42 20 29C39 29 50 40 50 57ZM50 45C50 25 62 15 80 15C80 35 68 45 50 45ZM50 70C65 70 77 61 81 48C63 48 52 57 50 70Z"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M37 83H63"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </div>
-
-                <p className="mt-6 text-center text-lg font-bold text-slate-900 sm:text-xl">
+                <p className="text-center text-lg font-bold text-navy sm:text-xl">
                   Pure. Rich. Aromatic.
                 </p>
 

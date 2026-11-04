@@ -1,45 +1,52 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import {
-  FiCheckCircle,
-  FiArrowRight,
-  FiShoppingBag,
-} from "react-icons/fi";
+import { Link, useLocation } from "react-router-dom";
+import { FiCheckCircle, FiArrowRight, FiShoppingBag } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa";
+import { PHONE_DISPLAY, whatsappLink } from "../config";
+import CheckoutSteps from "../components/CheckoutSteps";
 
 const OrderSuccess = () => {
+  const { state } = useLocation();
+  const resendURL = state?.whatsappURL ?? whatsappLink("Hi, I just placed an order on the Ponia'g Hing website.");
+
   return (
-    <div className="min-h-[75vh] bg-[#F8F3E9] flex items-center justify-center px-6">
-
-      <div className="max-w-xl text-center">
-
-        <div className="w-24 h-24 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto">
-
-          <FiCheckCircle className="text-5xl" />
-
+    <div className="flex min-h-[75vh] items-center justify-center bg-surface px-4 py-12 sm:px-6">
+      <div className="w-full max-w-xl text-center">
+        <div className="flex justify-center">
+          <CheckoutSteps current={4} />
         </div>
 
-        <p className="text-[#8B1E1E] uppercase tracking-[0.25em] text-sm font-semibold mt-8">
-          Order Sent
+        <div className="mx-auto mt-8 flex h-20 w-20 items-center justify-center rounded-full bg-green-100 text-green-600">
+          <FiCheckCircle className="text-4xl" />
+        </div>
+
+        <h1 className="mt-6 text-3xl font-bold text-navy sm:text-4xl">Almost done!</h1>
+
+        <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg">
+          WhatsApp has opened with your order. <strong className="text-navy">Tap send</strong> in
+          WhatsApp so we receive it, and we'll confirm delivery with you.
         </p>
 
-        <h1 className="text-4xl md:text-5xl font-bold text-[#351818] mt-3">
-          Thank You!
-        </h1>
+        <div className="mt-6 rounded-2xl bg-white p-5 text-left shadow-sm">
+          <p className="font-semibold text-navy">WhatsApp didn't open?</p>
+          <p className="mt-1 text-sm text-slate-600">
+            Tap below to open it again, or message us at {PHONE_DISPLAY}.
+          </p>
+          <a
+            href={resendURL}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-whatsapp py-3.5 font-bold text-white transition hover:bg-whatsapp-dark"
+          >
+            <FaWhatsapp className="text-xl" />
+            Open WhatsApp again
+          </a>
+        </div>
 
-        <p className="text-gray-600 text-lg leading-8 mt-5">
-          Your order details have been prepared for WhatsApp.
-          Please make sure the WhatsApp message was sent successfully.
-        </p>
-
-        <p className="text-[#351818] font-semibold mt-5">
-          Our team will contact you to confirm your order.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-
+        <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
           <Link
             to="/our-hing"
-            className="bg-[#8B1E1E] text-white px-7 py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2"
+            className="flex items-center justify-center gap-2 rounded-xl bg-blue-700 px-7 py-3.5 font-semibold text-white transition hover:bg-blue-800"
           >
             <FiShoppingBag />
             Continue Shopping
@@ -47,16 +54,13 @@ const OrderSuccess = () => {
 
           <Link
             to="/"
-            className="border border-[#8B1E1E] text-[#8B1E1E] px-7 py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2"
+            className="flex items-center justify-center gap-2 rounded-xl border border-blue-700 px-7 py-3.5 font-semibold text-blue-700 transition hover:bg-blue-50"
           >
             Back to Home
             <FiArrowRight />
           </Link>
-
         </div>
-
       </div>
-
     </div>
   );
 };
