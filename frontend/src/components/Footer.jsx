@@ -1,23 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
+import { FaWhatsapp } from "react-icons/fa";
+import Logo from "./Logo";
+import { EMAIL, PHONE_DISPLAY, PHONE_LINK, whatsappLink } from "../config";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-
-    if (!email.trim()) {
-      setMessage("Please enter your email address.");
-      return;
-    }
-
-    setMessage(
-      "Thank you for your interest! Newsletter subscription needs to be connected to a backend."
-    );
-  };
-
   const shopLinks = [
     { label: "Our Hing", to: "/our-hing" },
     { label: "Premium Hing", to: "/our-hing" },
@@ -37,79 +24,66 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative overflow-hidden bg-[#0D2340] text-white">
-      {/* Newsletter Section */}
-      <div className="bg-[#FAF8F1] px-5 py-12 sm:px-8 lg:py-16">
+    <footer className="relative overflow-hidden bg-navy text-white">
+      {/* Contact CTA */}
+      <div className="bg-surface px-5 py-12 sm:px-8 lg:py-16">
         <div className="mx-auto max-w-7xl">
-          <div className="relative overflow-hidden rounded-[2rem] border border-[#E9E0C8] bg-gradient-to-r from-[#F5F0E1] via-[#FCFAF4] to-[#F2EBD8] px-6 py-10 sm:px-10 lg:px-14 lg:py-12">
-            <div className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full border border-[#D7B66A]/30" />
-            <div className="pointer-events-none absolute -right-5 -top-10 h-48 w-48 rounded-full border border-[#D7B66A]/20" />
+          <div className="relative overflow-hidden rounded-[2rem] border border-blue-100 bg-gradient-to-r from-blue-50 via-white to-sky-50 px-6 py-10 sm:px-10 lg:px-14 lg:py-12">
+            <div className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full border border-gold/30" />
+            <div className="pointer-events-none absolute -right-5 -top-10 h-48 w-48 rounded-full border border-gold/20" />
 
             <div className="relative grid items-center gap-9 lg:grid-cols-[1.2fr_0.8fr]">
               <div>
                 <div className="flex items-center gap-3">
-                  <span className="text-xs font-bold uppercase tracking-[0.24em] text-[#B78627]">
-                    Stay Connected
+                  <span className="text-xs font-bold uppercase tracking-[0.24em] text-gold-dark">
+                    Talk To Us
                   </span>
-                  <span className="h-px w-12 bg-[#D7B66A]" />
+                  <span className="h-px w-12 bg-gold" />
                 </div>
 
-                <h2 className="mt-5 max-w-2xl font-serif text-3xl font-bold leading-tight text-[#102A4C] sm:text-4xl lg:text-5xl">
-                  A little more flavour,
-                  <span className="block text-[#B78627]">
-                    straight to your inbox.
+                <h2 className="mt-5 max-w-2xl font-serif text-3xl font-bold leading-tight text-navy sm:text-4xl lg:text-5xl">
+                  Questions or bulk orders?
+                  <span className="block text-gold-dark">
+                    We're one message away.
                   </span>
                 </h2>
 
                 <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base">
-                  Get updates, recipes and offers from Ponia'g.
+                  Message us on WhatsApp for orders, bulk enquiries or anything about our hing.
                 </p>
 
-                <form
-                  onSubmit={handleSubscribe}
-                  className="mt-7 flex max-w-xl flex-col gap-3 sm:flex-row"
-                >
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      setMessage("");
-                    }}
-                    placeholder="Your email address"
-                    aria-label="Your email address"
-                    required
-                    className="min-w-0 flex-1 rounded-full border border-slate-300 bg-white px-5 py-4 text-sm text-slate-800 outline-none transition focus:border-[#173A64] focus:ring-2 focus:ring-blue-100"
-                  />
-
-                  <button
-                    type="submit"
-                    className="flex items-center justify-center gap-3 rounded-full bg-[#102A4C] px-7 py-4 text-sm font-semibold text-white transition duration-300 hover:bg-[#1D4775] focus:outline-none focus:ring-2 focus:ring-[#D7B66A] focus:ring-offset-2"
+                <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                  <a
+                    href={whatsappLink("Hi Ponia'g Hing, I'd like to know more about your hing.")}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center justify-center gap-2 rounded-full bg-whatsapp px-7 py-4 text-sm font-bold text-white transition hover:bg-whatsapp-dark"
                   >
-                    Subscribe <span aria-hidden="true">→</span>
-                  </button>
-                </form>
-
-                {message && (
-                  <p aria-live="polite" className="mt-3 text-xs leading-5 text-slate-600">
-                    {message}
-                  </p>
-                )}
+                    <FaWhatsapp className="text-lg" />
+                    Chat on WhatsApp
+                  </a>
+                  <Link
+                    to="/our-hing"
+                    className="flex items-center justify-center gap-2 rounded-full bg-navy px-7 py-4 text-sm font-bold text-white transition hover:bg-navy-light"
+                  >
+                    Shop Hing <span aria-hidden="true">→</span>
+                  </Link>
+                </div>
               </div>
 
               {/* Decorative text instead of icons */}
               <div className="relative hidden min-h-[210px] items-center justify-center lg:flex">
-                <div className="absolute right-5 top-3 h-44 w-44 rounded-full border border-[#D7B66A]/30" />
-                <div className="absolute right-10 top-8 h-36 w-36 rounded-full border border-[#D7B66A]/40" />
+                <div className="absolute right-5 top-3 h-44 w-44 rounded-full border border-gold/30" />
+                <div className="absolute right-10 top-8 h-36 w-36 rounded-full border border-gold/40" />
 
                 <div className="relative max-w-xs text-center">
-                  <p className="font-serif text-3xl italic leading-snug text-[#102A4C]">
+                  <p className="font-serif text-3xl italic leading-snug text-navy">
                     Good Food,
-                    <span className="block text-[#B78627]">
+                    <span className="block text-gold-dark">
                       Better Living
                     </span>
                   </p>
-                  <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-[#D7B66A]" />
+                  <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-gold" />
                   <p className="mt-4 text-xs uppercase tracking-[0.2em] text-slate-500">
                     The authentic taste of India
                   </p>
@@ -129,35 +103,14 @@ const Footer = () => {
           <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.35fr_0.8fr_0.8fr_1.15fr] lg:gap-10">
             {/* Brand */}
             <div>
-              <Link
-                to="/"
-                aria-label="Ponia'g Hing home"
-                className="group inline-flex items-center gap-3"
-              >
-                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-2 border-[#D7B66A] text-[#F4D78B] transition duration-300 group-hover:bg-white/5">
-                  <span className="font-serif text-4xl font-bold">P</span>
-                </div>
-
-                <div>
-                  <h3 className="font-serif text-3xl font-bold tracking-tight text-white">
-                    Ponia'g
-                  </h3>
-                  <div className="mt-1 flex items-center gap-2">
-                    <span className="h-px w-5 bg-[#D7B66A]" />
-                    <span className="text-xs font-bold uppercase tracking-[0.35em] text-[#F4D78B]">
-                      Hing
-                    </span>
-                    <span className="h-px w-5 bg-[#D7B66A]" />
-                  </div>
-                </div>
-              </Link>
+              <Logo size="lg" dark />
 
               <p className="mt-6 max-w-sm text-sm leading-7 text-blue-100/65">
                 Premium hing made to bring authentic aroma and flavour to
                 everyday Indian cooking.
               </p>
 
-              <div className="mt-6 h-1 w-14 rounded-full bg-[#D7B66A]" />
+              <div className="mt-6 h-1 w-14 rounded-full bg-gold" />
 
               <div className="mt-6 flex flex-wrap gap-3">
                 {socialLinks.map((social) => (
@@ -166,14 +119,14 @@ const Footer = () => {
                     href={social.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-full border border-[#D7B66A]/60 px-4 py-2 text-xs font-medium text-[#F4D78B] transition duration-300 hover:-translate-y-1 hover:bg-[#D7B66A] hover:text-[#0D2340]"
+                    className="rounded-full border border-gold/60 px-4 py-2 text-xs font-medium text-gold-light transition duration-300 hover:-translate-y-1 hover:bg-gold hover:text-navy"
                   >
                     {social.label}
                   </a>
                 ))}
               </div>
 
-              <p className="mt-7 font-serif text-xl italic text-[#F4D78B]">
+              <p className="mt-7 font-serif text-xl italic text-gold-light">
                 Pure Hing. Pure Trust.
               </p>
             </div>
@@ -181,7 +134,7 @@ const Footer = () => {
             {/* Shop */}
             <div>
               <h4 className="font-serif text-xl font-bold text-white">Shop</h4>
-              <div className="mb-6 mt-3 h-1 w-10 rounded-full bg-[#D7B66A]" />
+              <div className="mb-6 mt-3 h-1 w-10 rounded-full bg-gold" />
 
               <ul className="space-y-5">
                 {shopLinks.map((item) => (
@@ -191,7 +144,7 @@ const Footer = () => {
                       className="flex items-center justify-between gap-2 text-sm text-blue-100/65 transition hover:text-white"
                     >
                       {item.label}
-                      <span className="text-[#D7B66A]" aria-hidden="true">›</span>
+                      <span className="text-gold" aria-hidden="true">›</span>
                     </Link>
                   </li>
                 ))}
@@ -201,7 +154,7 @@ const Footer = () => {
             {/* Company */}
             <div>
               <h4 className="font-serif text-xl font-bold text-white">Company</h4>
-              <div className="mb-6 mt-3 h-1 w-10 rounded-full bg-[#D7B66A]" />
+              <div className="mb-6 mt-3 h-1 w-10 rounded-full bg-gold" />
 
               <ul className="space-y-5">
                 {companyLinks.map((item) => (
@@ -211,7 +164,7 @@ const Footer = () => {
                       className="flex items-center justify-between gap-2 text-sm text-blue-100/65 transition hover:text-white"
                     >
                       {item.label}
-                      <span className="text-[#D7B66A]" aria-hidden="true">›</span>
+                      <span className="text-gold" aria-hidden="true">›</span>
                     </Link>
                   </li>
                 ))}
@@ -223,21 +176,28 @@ const Footer = () => {
               <h4 className="font-serif text-xl font-bold text-white">
                 Get In Touch
               </h4>
-              <div className="mb-6 mt-3 h-1 w-10 rounded-full bg-[#D7B66A]" />
+              <div className="mb-6 mt-3 h-1 w-10 rounded-full bg-gold" />
 
               <div className="space-y-5 text-sm text-blue-100/70">
                 <a
-                  href="mailto:hello@poniaghing.com"
-                  className="block break-all transition hover:text-white"
+                  href={whatsappLink()}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 transition hover:text-white"
                 >
-                  hello@poniaghing.com
+                  <FaWhatsapp className="text-base text-whatsapp" />
+                  {PHONE_DISPLAY}
+                </a>
+
+                <a href={PHONE_LINK} className="block transition hover:text-white">
+                  Call: {PHONE_DISPLAY}
                 </a>
 
                 <a
-                  href="tel:+919999999999"
-                  className="block transition hover:text-white"
+                  href={`mailto:${EMAIL}`}
+                  className="block break-all transition hover:text-white"
                 >
-                  +91 99999 99999
+                  {EMAIL}
                 </a>
 
                 <p>India</p>
@@ -245,21 +205,21 @@ const Footer = () => {
 
               <div className="mt-7 grid grid-cols-3 border-t border-white/10 pt-6">
                 <div className="px-1 text-center">
-                  <p className="font-serif text-lg text-[#F4D78B]">01</p>
+                  <p className="font-serif text-lg text-gold-light">01</p>
                   <span className="mt-2 block text-[11px] leading-4 text-blue-100/70">
                     Quality
                   </span>
                 </div>
 
                 <div className="border-x border-white/10 px-1 text-center">
-                  <p className="font-serif text-lg text-[#F4D78B]">02</p>
+                  <p className="font-serif text-lg text-gold-light">02</p>
                   <span className="mt-2 block text-[11px] leading-4 text-blue-100/70">
                     Authentic
                   </span>
                 </div>
 
                 <div className="px-1 text-center">
-                  <p className="font-serif text-lg text-[#F4D78B]">03</p>
+                  <p className="font-serif text-lg text-gold-light">03</p>
                   <span className="mt-2 block text-[11px] leading-4 text-blue-100/70">
                     Made with care
                   </span>
@@ -278,24 +238,6 @@ const Footer = () => {
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-blue-100/55 sm:text-sm">
-            <Link
-              to="/privacy-policy"
-              className="transition hover:text-[#F4D78B]"
-            >
-              Privacy Policy
-            </Link>
-
-            <span className="hidden h-4 w-px bg-white/15 sm:block" />
-
-            <Link
-              to="/terms-and-conditions"
-              className="transition hover:text-[#F4D78B]"
-            >
-              Terms &amp; Conditions
-            </Link>
-
-            <span className="hidden h-4 w-px bg-white/15 sm:block" />
-
             <span>Made with care in India</span>
           </div>
         </div>

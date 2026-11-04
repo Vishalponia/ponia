@@ -7,7 +7,6 @@ import {
   FiShield,
 } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import logo from "../images/ponia logo.png";
 
 const BrandStory = () => {
   const features = [
@@ -41,11 +40,11 @@ const BrandStory = () => {
               {/* Brand logo */}
               <div className="relative z-10 flex h-full min-h-[380px] flex-col items-center justify-center sm:min-h-[450px]">
 
-                <div className="flex h-48 w-48 items-center justify-center rounded-[32px] border border-white bg-white/90 p-5 shadow-2xl shadow-blue-900/10 transition duration-500 hover:-translate-y-2 hover:shadow-blue-900/15 sm:h-64 sm:w-64 sm:rounded-[40px] sm:p-7">
+                <div className="flex h-48 w-48 items-center justify-center rounded-full border border-white bg-white/90 p-2 shadow-2xl shadow-blue-900/10 transition duration-500 hover:-translate-y-2 hover:shadow-blue-900/15 sm:h-64 sm:w-64">
                   <img
-                    src={logo}
+                    src="/images/poniag-logo.png"
                     alt="Ponia'g Hing brand logo"
-                    className="h-full w-full object-contain"
+                    className="h-full w-full rounded-full object-contain"
                   />
                 </div>
 
@@ -54,7 +53,7 @@ const BrandStory = () => {
                     Our Philosophy
                   </p>
 
-                  <h3 className="mt-3 text-2xl font-extrabold leading-tight tracking-tight text-slate-950 sm:text-3xl">
+                  <h3 className="mt-3 text-2xl font-extrabold leading-tight tracking-tight text-navy sm:text-3xl">
                     Good food begins
                     <br />
                     with good ingredients.
@@ -80,7 +79,7 @@ const BrandStory = () => {
                 </div>
 
                 <div>
-                  <p className="text-2xl font-extrabold tracking-tight text-slate-950">
+                  <p className="text-2xl font-extrabold tracking-tight text-navy">
                     Quality
                   </p>
                   <p className="text-xs font-semibold text-slate-500">
@@ -108,7 +107,7 @@ const BrandStory = () => {
             </span>
 
             {/* HEADING */}
-            <h2 className="mt-6 text-4xl font-extrabold leading-[1.12] tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
+            <h2 className="mt-6 text-4xl font-extrabold leading-[1.12] tracking-tight text-navy sm:text-5xl lg:text-6xl">
               A little tradition,
               <br />
               <span className="text-blue-700">
@@ -166,7 +165,7 @@ const BrandStory = () => {
             <div className="mt-12 grid grid-cols-3 gap-4 border-t border-slate-200 pt-7 sm:gap-6">
 
               <div>
-                <p className="text-xl font-extrabold tracking-tight text-slate-950 sm:text-2xl">
+                <p className="text-xl font-extrabold tracking-tight text-navy sm:text-2xl">
                   Pure
                 </p>
                 <p className="mt-1 text-xs text-slate-500 sm:text-sm">
@@ -175,7 +174,7 @@ const BrandStory = () => {
               </div>
 
               <div className="border-l border-slate-200 pl-4 sm:pl-6">
-                <p className="text-xl font-extrabold tracking-tight text-slate-950 sm:text-2xl">
+                <p className="text-xl font-extrabold tracking-tight text-navy sm:text-2xl">
                   Rich
                 </p>
                 <p className="mt-1 text-xs text-slate-500 sm:text-sm">
@@ -184,7 +183,7 @@ const BrandStory = () => {
               </div>
 
               <div className="border-l border-slate-200 pl-4 sm:pl-6">
-                <p className="text-xl font-extrabold tracking-tight text-slate-950 sm:text-2xl">
+                <p className="text-xl font-extrabold tracking-tight text-navy sm:text-2xl">
                   Desi
                 </p>
                 <p className="mt-1 text-xs text-slate-500 sm:text-sm">
